@@ -2,7 +2,7 @@ import csv
 import os
 from datetime import datetime
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox 
 
 def write2csv(date, price, comment, account_item, voucher_number):
     year_month = date[:6]
