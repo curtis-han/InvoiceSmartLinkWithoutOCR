@@ -8,7 +8,7 @@ OUTPUT_DIR = './output'
 
 def write2csv(date, price, comment, account_item, voucher_number):
     year_month = date[:6]
-    filename = f"{year_month}.csv"
+    filename = f"仕訳帳_{year_month}.csv"
     if not os.path.exists(OUTPUT_DIR):
         os.makedirs(OUTPUT_DIR)
     filepath = os.path.join(OUTPUT_DIR, filename)
