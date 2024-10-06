@@ -8,6 +8,8 @@ from collections import defaultdict
 运行方法:
     python createGeneraLedgerANDTrialBalance.py
     然后输入 仕訳帳 的地址即可
+打包:
+    pyinstaller --onefile --icon=cGLATB.ico --name=createGeneraLedgerANDTrialBalance createGeneraLedgerANDTrialBalance.py
 
 """
 
