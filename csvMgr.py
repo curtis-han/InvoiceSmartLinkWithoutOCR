@@ -16,7 +16,7 @@ def write2csv(date, price, comment, account_item, voucher_number):
         # 使用 utf-8-sig 编码创建文件
         with open(filepath, 'w', newline='', encoding='utf-8-sig') as csvfile:
             csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(['日 付', '金 額', '借方科目', '概要', '貸方科目', '金額', '伝票番号'])
+            csvwriter.writerow(['日付', '金額', '借方科目', '概要', '貸方科目', '金額', '伝票番号'])
     
     # Read existing rows
     rows = []
