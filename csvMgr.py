@@ -15,7 +15,7 @@ def write2csv(date, price, comment, account_item, voucher_number):
     if not os.path.exists(filepath):
         with open(filepath, 'w', newline='') as csvfile:
             csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(['日 付', '金 額', '借り方科目', '概要', '貸方科目', '金額','伝票番号'])
+            csvwriter.writerow(['日 付', '金 額', '借方科目', '概要', '貸方科目', '金額','伝票番号'])
     
     # Read existing rows
     rows = []

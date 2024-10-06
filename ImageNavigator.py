@@ -40,8 +40,9 @@ class ImageNavigator:
         self._draw_image_from_image(canvas, image)
 
     def _draw_image(self, canvas, image_path):
-        image = Image.open(image_path)
-        self._draw_image_from_image(canvas, image)
+        with Image.open(image_path) as image:
+            self._draw_image_from_image(canvas, image)
+
 
     def _draw_image_from_image(self, canvas, image):
         # Canvasのサイズを取得

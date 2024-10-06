@@ -97,7 +97,9 @@ class Controller:
                 messagebox.showerror("エラー", f"ファイルが存在しません: {current_image_path}")
                 return
             
-            self.current_image = Image.open(current_image_path)  # 画像を読み込む
+            #self.current_image = Image.open(current_image_path)  # 画像を読み込む
+            with Image.open(current_image_path) as img:
+                self.current_image = img.copy()  # 复制图像到内存中
             image_navigator.show_image(self.ui.tk_canvas_SHOW_PICTURE, current_image_path)
             self.ui.tk_label_SHOW_PIC_PATH.config(text=current_image_path)
         else:
@@ -116,14 +118,16 @@ class Controller:
         writeAccountItem = self.ui.tk_select_box_AccountItem.get()
         write_year_month = writeDate[:6]
         output_folder_path = WORKOUT_PATH + "/" + write_year_month
-        write_filename = current_image_path.split("/")[-1]
+        #write_filename = current_image_path.split("/")[-1]
+        filename_with_extension = os.path.split(current_image_path)[-1]
+        filename_without_extension = os.path.splitext(filename_with_extension)[0]
         #--------------------------------------------------------
         message = f"请确认数据:\n日期: {writeDate}\n价格: {writePrice}\n评论: {writeComment}\n勘定項目: {writeAccountItem}"
         response = messagebox.askyesno("确认数据", message)
         if not response:
             return
-        write2csv(writeDate, writePrice, writeComment, writeAccountItem, write_filename)
-
+        write2csv(writeDate, writePrice, writeComment, writeAccountItem, filename_without_extension)
+        self.current_image.close()
         move_file(current_image_path, output_folder_path)
         self.reset_all_items()
 
