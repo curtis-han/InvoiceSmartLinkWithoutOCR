@@ -2,3 +2,5 @@ __pycache__/
 dist/
 build/
 output/
+main.spec
+IvoiceSmartLinkWithoutOCR.spec
