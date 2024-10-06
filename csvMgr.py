@@ -13,14 +13,15 @@ def write2csv(date, price, comment, account_item, voucher_number):
         os.makedirs(OUTPUT_DIR)
     filepath = os.path.join(OUTPUT_DIR, filename)
     if not os.path.exists(filepath):
-        with open(filepath, 'w', newline='') as csvfile:
+        # 使用 utf-8-sig 编码创建文件
+        with open(filepath, 'w', newline='', encoding='utf-8-sig') as csvfile:
             csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(['日 付', '金 額', '借方科目', '概要', '貸方科目', '金額','伝票番号'])
+            csvwriter.writerow(['日 付', '金 額', '借方科目', '概要', '貸方科目', '金額', '伝票番号'])
     
     # Read existing rows
     rows = []
     if os.path.exists(filepath):
-        with open(filepath, 'r', newline='') as csvfile:
+        with open(filepath, 'r', newline='', encoding='utf-8-sig') as csvfile:
             csvreader = csv.reader(csvfile)
             rows = list(csvreader)
     
@@ -51,7 +52,7 @@ def write2csv(date, price, comment, account_item, voucher_number):
     data_rows.sort(key=lambda x: datetime.strptime(x[0], '%Y%m%d'))
 
     # Write rows back to the CSV
-    with open(filepath, 'w', newline='') as csvfile:
+    with open(filepath, 'w', newline='', encoding='utf-8-sig') as csvfile:
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(header)
         csvwriter.writerows(data_rows)
