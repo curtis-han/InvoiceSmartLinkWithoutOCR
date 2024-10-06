@@ -10,6 +10,8 @@ image_navigator = ImageNavigator()
 current_image_path = None
 config_json = JsonManager()
 
+WORKOUT_PATH = "./output/photo"
+
 
 class Controller:
     # 导入UI类后，替换以下的 object 类型，将获得 IDE 属性提示功能
@@ -35,8 +37,8 @@ class Controller:
         self.ui.tk_input_DATE_INPUT.delete(0, 'end')
         self.ui.tk_input_PRICE_INPUT.delete(0, 'end')
         self.ui.tk_input_COMMENT_INPUTG.delete(0, 'end')
-        self.ui.tk_select_box_AccountKind.set("")
-        self.ui.tk_select_box_AccountItem.set("")
+        #self.ui.tk_select_box_AccountKind.set("")
+        #self.ui.tk_select_box_AccountItem.set("")
         self.ui.tk_label_SHOW_PIC_PATH.config(text="")
         self.ui.tk_canvas_SHOW_PICTURE.delete("all")
         self.ui.tk_canvas_SHOW_PICTURE.update()  # Refresh the canvas to ensure it is cleared
@@ -112,7 +114,6 @@ class Controller:
         writePrice = self.ui.tk_input_PRICE_INPUT.get()
         writeComment = self.ui.tk_input_COMMENT_INPUTG.get()
         writeAccountItem = self.ui.tk_select_box_AccountItem.get()
-        WORKOUT_PATH = "./output/photo"
         write_year_month = writeDate[:6]
         output_folder_path = WORKOUT_PATH + "/" + write_year_month
         write_filename = current_image_path.split("/")[-1]
@@ -126,7 +127,7 @@ class Controller:
         move_file(current_image_path, output_folder_path)
         self.reset_all_items()
 
-        print("<Button-1>事件未处理:", evt)
+        print("<Button-1>事件未处理: reset_all_items", evt)
 
     def on_account_kind_change(self, evt):
         self.ui.tk_select_box_AccountItem.config(values=config_json.data[self.ui.tk_select_box_AccountKind.get()])

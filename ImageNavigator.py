@@ -79,6 +79,10 @@ class ImageNavigator:
 def move_file(src, dest):
     if not os.path.exists(dest):
         os.makedirs(dest)
+    dest_file_path = os.path.join(dest, os.path.basename(src))
+    if os.path.exists(dest_file_path):
+        #os.remove(dest_file_path)
+        return
     shutil.move(src, dest)
 
 if __name__ == "__main__":

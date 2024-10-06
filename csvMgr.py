@@ -4,21 +4,41 @@ from datetime import datetime
 import tkinter as tk
 from tkinter import messagebox 
 
+OUTPUT_DIR = './output'
+
 def write2csv(date, price, comment, account_item, voucher_number):
     year_month = date[:6]
     filename = f"{year_month}.csv"
-    filepath = os.path.join('./output', filename)
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
+    filepath = os.path.join(OUTPUT_DIR, filename)
     if not os.path.exists(filepath):
         with open(filepath, 'w', newline='') as csvfile:
             csvwriter = csv.writer(csvfile)
             csvwriter.writerow(['日 付', '金 額', '借り方科目', '概要', '貸方科目', '金額','伝票番号'])
+    
     # Read existing rows
     rows = []
     if os.path.exists(filepath):
         with open(filepath, 'r', newline='') as csvfile:
             csvreader = csv.reader(csvfile)
             rows = list(csvreader)
-
+    
+    # Check if the voucher_number already exists in the CSV
+    if any(row[6] == voucher_number for row in rows[1:]):  # Skip header row
+        root = tk.Tk()
+        root.withdraw()  # Hide the main window
+        messagebox.showwarning("Duplicate Voucher Number", f"The voucher number {voucher_number} already exists in the CSV file.")
+        return
+    
+    # Check for duplicates
+    for row in rows[1:]:  # Skip header row
+        if row[0] == date and row[1] == price:
+            root = tk.Tk()
+            root.withdraw()  # Hide the main window
+            messagebox.showwarning("Duplicate Data", "The data with the same date and price already exists in the CSV file.")
+            return
+    
     # Append the new row
     new_row = [date, price, account_item, comment, '現金', price, voucher_number]
     rows.append(new_row)

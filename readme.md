@@ -18,6 +18,9 @@ python main.py
     ```
 2. 将发票文件上传到指定目录，应用将自动处理并生成结果文件。
 
+## 如何打包
+pyinstaller --onefile --icon=isl_no_ocr.ico --name=IvoiceSmartLinkWithoutOCR main.py
+
 ## 贡献指南
 欢迎贡献代码！请遵循以下步骤:
 1. Fork 本仓库。
